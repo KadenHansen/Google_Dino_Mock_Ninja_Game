@@ -2,10 +2,13 @@ import { layGround, moveGround } from "./ground.js"
 
 setWorldScale()
 window.addEventListener("resize", setWorldScale)
-
-layGround()
+document.addEventListener("keydown", startGame, {once: true})
 
 let previousTime
+let gameSpeed
+let gameRateIncrease = .00001
+let startScreen = document.querySelector(".start-screen")
+
 function update(time) {
     if (previousTime == null) {
         previousTime = time
@@ -13,12 +16,24 @@ function update(time) {
         return
     }
     let currentTime = time - previousTime
-    moveGround(currentTime)    
-
+    moveGround(currentTime, gameSpeed)
+    increaseGameSpeed(currentTime)
+    
     previousTime = time
     window.requestAnimationFrame(update)
 }
-window.requestAnimationFrame(update)
+
+function increaseGameSpeed(currentTime) {
+    gameSpeed += currentTime * gameRateIncrease
+}
+
+function startGame() {
+    previousTime = null
+    layGround()
+    gameSpeed = .75
+    startScreen.remove()
+    window.requestAnimationFrame(update)
+}
 
 function setWorldScale() {
     let worldScale
