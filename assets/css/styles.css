@@ -24,13 +24,13 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 }
 
 .ground {
     position: absolute;
     top: 65%;
-    left: 0;
+    --left: 0;
+    left: calc(var(--left) * 1%);
     width: 100%;
     z-index: -1;
 }
