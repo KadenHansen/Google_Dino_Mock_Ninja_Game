@@ -1,4 +1,5 @@
 import { layGround, moveGround } from "./ground.js"
+import { startNinja, moveNinja, cycleRun } from "./ninja.js"
 
 setWorldScale()
 window.addEventListener("resize", setWorldScale)
@@ -7,6 +8,7 @@ document.addEventListener("keydown", startGame, {once: true})
 let previousTime
 let gameSpeed
 let gameRateIncrease = .00001
+let startSpeed = 100
 let startScreen = document.querySelector(".start-screen")
 
 function update(time) {
@@ -17,6 +19,7 @@ function update(time) {
     }
     let currentTime = time - previousTime
     moveGround(currentTime, gameSpeed)
+    // moveNinja(currentTime, gameSpeed)
     increaseGameSpeed(currentTime)
     
     previousTime = time
@@ -25,11 +28,14 @@ function update(time) {
 
 function increaseGameSpeed(currentTime) {
     gameSpeed += currentTime * gameRateIncrease
+    startSpeed += gameSpeed * -.01
+    cycleRun(startSpeed)
 }
 
 function startGame() {
     previousTime = null
     layGround()
+    startNinja()
     gameSpeed = .75
     startScreen.remove()
     window.requestAnimationFrame(update)
