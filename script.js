@@ -1,5 +1,5 @@
 import { layGround, moveGround } from "./ground.js"
-import { startNinja, moveNinja, cycleRun } from "./ninja.js"
+import { startNinja, cycleRun } from "./ninja.js"
 
 setWorldScale()
 window.addEventListener("resize", setWorldScale)

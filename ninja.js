@@ -7,6 +7,20 @@ let ninjaRunningFrames = [
     "./assets/images/ninja/ninja_running/ninja_run_5.png",
     "./assets/images/ninja/ninja_running/ninja_run_6.png",
 ]
+// let runningFrameTime = 100
+// let jumpSpeed = .45
+// let gravity = .01
+
+let isJumping
+
+export function startNinja() {
+    isJumping = false
+}
+
+export function moveNinja() {
+    // ninjaRun()
+    // ninjaJump()
+}
 
 let currentImage = 0 
 
