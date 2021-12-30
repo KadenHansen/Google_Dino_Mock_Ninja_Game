@@ -1,5 +1,6 @@
 import { layGround, moveGround } from "./ground.js"
 import { startNinja, moveNinja } from "./ninja.js"
+import { setUpShuriken, moveShuriken } from "./obstacles.js"
 
 setWorldScale()
 window.addEventListener("resize", setWorldScale)
@@ -10,6 +11,7 @@ let gameSpeed
 let gameRateIncrease = .00001
 let startSpeed = 100
 let startScreen = document.querySelector(".start-screen")
+let currentFrame
 
 function update(time) {
     if (previousTime == null) {
@@ -17,14 +19,17 @@ function update(time) {
         window.requestAnimationFrame(update)
         return
     }
-    let currentTime = time - previousTime
-    moveGround(currentTime, gameSpeed)
-    increaseGameSpeed(currentTime)
+    currentFrame = time - previousTime
+    increaseGameSpeed(currentFrame)
+
+    moveGround(currentFrame, gameSpeed)
+    moveNinja(startSpeed, currentFrame)
+    moveShuriken(currentFrame, gameSpeed)
     
     previousTime = time
     window.requestAnimationFrame(update)
-    moveNinja(startSpeed, currentTime)
 }
+
 
 function increaseGameSpeed(currentTime) {
     gameSpeed += currentTime * gameRateIncrease
@@ -35,7 +40,8 @@ function startGame() {
     previousTime = null
     layGround()
     startNinja()
-    gameSpeed = .75
+    setUpShuriken()
+    gameSpeed = 1.25
     startScreen.remove()
     window.requestAnimationFrame(update)
 }

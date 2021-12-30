@@ -42,3 +42,10 @@ body {
     left: 2%;
     height: 25%;
 }
+
+.shuriken {
+    position: absolute;
+    left: calc(var(--left) * 1%);
+    bottom: 20%;
+    height: 25%;
+}

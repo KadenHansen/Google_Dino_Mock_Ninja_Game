@@ -9,7 +9,6 @@ let ninjaRunningFrames = [
     "./assets/images/ninja/ninja_running/ninja_run_5.png",
     "./assets/images/ninja/ninja_running/ninja_run_6.png",
 ]
-// let runningFrameTime = 100
 let jumpSpeed = .45
 let gravity = .00195
 let yVelocity
@@ -66,17 +65,17 @@ export async function cycleRun(interval) {
     ninja.src = ninjaRunningFrames[currentImage]
 }
 
-function jumpNinja(currentTime) {
+function jumpNinja(currentFrame) {
     if(!isJumping) return
 
-    incrementAssetProp(ninja, "--bottom", yVelocity * currentTime)
+    incrementAssetProp(ninja, "--bottom", yVelocity * currentFrame)
     
     if (getAssetProp(ninja, "--bottom") <= 20) {
         setAssetProp(ninja, "--bottom", 20)
         isJumping = false
     }
     
-    yVelocity -= gravity * currentTime
+    yVelocity -= gravity * currentFrame
 }
 
 function onJump(e) {
