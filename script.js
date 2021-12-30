@@ -12,6 +12,8 @@ let gameRateIncrease = .00001
 let startSpeed = 100
 let startScreen = document.querySelector(".start-screen")
 let currentFrame
+let score
+let scoreText = document.querySelector(".score")
 
 function update(time) {
     if (previousTime == null) {
@@ -25,6 +27,7 @@ function update(time) {
     moveGround(currentFrame, gameSpeed)
     moveNinja(startSpeed, currentFrame)
     moveShuriken(currentFrame, gameSpeed)
+    updateScore(currentFrame)
 
     if(checkLose()) {return loseGame()}
     
@@ -52,12 +55,18 @@ function increaseGameSpeed(currentTime) {
     startSpeed += gameSpeed * -.01
 }
 
+function updateScore(currentFrame) {
+    score += currentFrame * .01
+    scoreText.textContent = "Score = " + Math.floor(score)
+}
+
 function startGame() {
     previousTime = null
     layGround()
     startNinja()
     setUpShuriken()
     gameSpeed = 1.25
+    score = 0
     startScreen.remove()
     window.requestAnimationFrame(update)
 }
