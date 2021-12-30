@@ -57,10 +57,15 @@ function increaseGameSpeed(currentTime) {
 
 function updateScore(currentFrame) {
     score += currentFrame * .01
-    scoreText.textContent = "Score = " + Math.floor(score)
+    scoreText.textContent = "Score: " + Math.floor(score)
 }
 
-function startGame() {
+function startGame(e) {
+    if (e.code !== "Enter") {
+        document.addEventListener("keydown", startGame, {once: true})
+        return
+    }
+
     previousTime = null
     layGround()
     startNinja()

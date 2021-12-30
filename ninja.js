@@ -87,7 +87,7 @@ function jumpNinja(currentFrame) {
 }
 
 function onJump(e) {
-    if(isJumping) return
+    if(isJumping || e.code !== "Space") return
     
     ninja.src = "./assets/images/ninja/ninja_jump.png"
     yVelocity = jumpSpeed
