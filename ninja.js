@@ -27,6 +27,14 @@ export function moveNinja(startSpeed, currentTime) {
     jumpNinja(currentTime)
 }
 
+export function getNinjaHitBox() {
+    return ninja.getBoundingClientRect()
+}
+
+export function ninjaHit() {
+    ninja.src = "./assets/images/ninja/ninja_hit.png"
+}
+
 let currentImage = 0 
 
 export async function cycleRun(interval) {

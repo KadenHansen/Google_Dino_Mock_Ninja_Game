@@ -1,41 +1,47 @@
 import { getAssetProp, setAssetProp, incrementAssetProp } from "./updateLevel.js"
 
 let speed = .05
-let shurikenIntervalMin = 500
-let shurikenIntervalMax = 2000
+let ObstacleIntervalMin = 750
+let ObstacleIntervalMax = 2000
 let world = document.querySelector(".world")
 
 let nextShurikenTime
 
 export function setUpShuriken() {
-    nextShurikenTime = shurikenIntervalMin
-    document.querySelectorAll(".shuriken").forEach(shuriken => {
-        shuriken.remove()
+    nextShurikenTime = ObstacleIntervalMin
+    document.querySelectorAll(".Obstacle").forEach(Obstacle=> {
+        Obstacle.remove()
     })
 }
 
 export function moveShuriken(currentFrame, gameSpeed) {
-    document.querySelectorAll(".shuriken").forEach(shuriken => {
-        incrementAssetProp(shuriken, "--left", gameSpeed * currentFrame * speed * -1)
+    document.querySelectorAll(".Obstacle").forEach(Obstacle=> {
+        incrementAssetProp(Obstacle, "--left", gameSpeed * currentFrame * speed * -1)
 
-        if(getAssetProp(shuriken, "--left") <= -30) {
-            shuriken.remove()
+        if(getAssetProp(Obstacle, "--left") <= -30) {
+            Obstacle.remove()
         }
     })
 
     if(nextShurikenTime <= 0) {
         createShuriken()
-        nextShurikenTime = randomNumberBetween(shurikenIntervalMin, shurikenIntervalMax) / gameSpeed
+        nextShurikenTime = randomNumberBetween(ObstacleIntervalMin, ObstacleIntervalMax) / gameSpeed
     }
     nextShurikenTime -= currentFrame
 }
 
+export function getShurikenHitBox() {
+    return [...document.querySelectorAll(".Obstacle")].map(Obstacle=> {
+        return Obstacle.getBoundingClientRect()
+    })
+}
+
 function createShuriken() {
-    let shuriken = document.createElement("img")
-    shuriken.src = "./assets/images/shuriken.gif"
-    shuriken.classList.add("shuriken")
-    setAssetProp(shuriken, "--left", 100)
-    world.append(shuriken)
+    let Obstacle= document.createElement("img")
+    Obstacle.src = "./assets/images/Kunai.png"
+    Obstacle.classList.add("Obstacle")
+    setAssetProp(Obstacle, "--left", 100)
+    world.append(Obstacle)
 }
 
 function randomNumberBetween(min, max) {

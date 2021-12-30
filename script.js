@@ -1,6 +1,6 @@
 import { layGround, moveGround } from "./ground.js"
-import { startNinja, moveNinja } from "./ninja.js"
-import { setUpShuriken, moveShuriken } from "./obstacles.js"
+import { startNinja, moveNinja, getNinjaHitBox, ninjaHit } from "./ninja.js"
+import { setUpShuriken, moveShuriken, getShurikenHitBox } from "./obstacles.js"
 
 setWorldScale()
 window.addEventListener("resize", setWorldScale)
@@ -25,11 +25,27 @@ function update(time) {
     moveGround(currentFrame, gameSpeed)
     moveNinja(startSpeed, currentFrame)
     moveShuriken(currentFrame, gameSpeed)
+
+    if(checkLose()) {return loseGame()}
     
     previousTime = time
     window.requestAnimationFrame(update)
 }
 
+function checkLose() {
+    let ninjaHitBox = getNinjaHitBox()
+    return getShurikenHitBox().some(hitBox => checkCollision(hitBox, ninjaHitBox))
+}
+
+function checkCollision(asset1, asset2) {
+    return (
+        asset1.left < asset2.right && 
+        asset1.top < asset2.bottom && 
+        asset1.right > asset2.left && 
+        asset1.bottom > asset2.top
+    )
+
+}
 
 function increaseGameSpeed(currentTime) {
     gameSpeed += currentTime * gameRateIncrease
@@ -44,6 +60,14 @@ function startGame() {
     gameSpeed = 1.25
     startScreen.remove()
     window.requestAnimationFrame(update)
+}
+
+function loseGame() {
+    ninjaHit()
+    setTimeout(() => {
+        document.addEventListener("keydown", startGame, { once: true })
+        startScreen.remove()
+    }, 100)
 }
 
 function setWorldScale() {

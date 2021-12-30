@@ -43,9 +43,9 @@ body {
     height: 25%;
 }
 
-.shuriken {
+.Obstacle{
     position: absolute;
     left: calc(var(--left) * 1%);
-    bottom: 20%;
-    height: 25%;
+    bottom: 25%;
+    height: 7.5%;
 }
