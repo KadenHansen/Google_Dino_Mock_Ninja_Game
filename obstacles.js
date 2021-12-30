@@ -1,6 +1,6 @@
 import { getAssetProp, setAssetProp, incrementAssetProp } from "./updateLevel.js"
 
-let speed = .05 // determines ratio for obstacle speed increase
+let speed = .09 // determines ratio for obstacle speed increase
 let ObstacleIntervalMin = 750 // sets min distance between obstacles
 let ObstacleIntervalMax = 2000 // sets max distance between obstacles
 let nextObstacleTime // tracks distance value for each instance of an obstacle for obstacle creation
