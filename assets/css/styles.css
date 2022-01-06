@@ -15,6 +15,7 @@ body {
     position: relative;
     width: 100%;
     height: 150px;
+    background-color: lightblue;
 }
 
 .score {
@@ -23,6 +24,7 @@ body {
     top: 2%;
     font-family: "Kaushan Script", cursive;
     font-size: 1.25em;
+    z-index: 1;
 }
 
 .start-screen {
@@ -32,6 +34,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: "Kaushan Script", cursive;
+    z-index: 1;
 }
 
 .ground {
@@ -40,7 +43,6 @@ body {
     --left: 0;
     left: calc(var(--left) * 1%);
     width: 100%;
-    z-index: -1;
 }
 
 .ninja {
@@ -48,6 +50,7 @@ body {
     --bottom: 20;
     bottom: calc(var(--bottom) * 1%);
     left: 2%;
+    z-index: 1;
     height: 25%;
 }
 
@@ -56,4 +59,5 @@ body {
     left: calc(var(--left) * 1%);
     bottom: 27.5%;
     height: 7.5%;
+    z-index: 1;
 }
